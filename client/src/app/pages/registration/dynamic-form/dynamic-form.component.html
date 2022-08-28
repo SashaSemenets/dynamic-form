@@ -1,0 +1,23 @@
+<div class="dynamic-form__wrapper">
+  <form [formGroup]="form" class="dynamic-form__content" (ngSubmit)="register()">
+    <div *ngFor="let data of formData" class="dynamic-form__field" [class.error]="form.controls[data.name].invalid && (form.controls[data.name].dirty || form.controls[data.name].touched)">
+      <label [attr.for]="data.name">{{ data.label }}<span *ngIf="data?.required">*</span></label>
+
+      <input *ngIf="data.type !== 'password'; else passwordField" [formControlName]="data.name" [id]="data.name" [type]="data.type">
+
+      <ng-template #passwordField>
+        <div class="dynamic-form__field-password">
+          <input [formControlName]="data.name" [id]="data.name" [type]="passwordType">
+          <i class="far" (click)="toggleType()" [ngClass]="{ 'fa-eye-slash': passwordType === 'text', 'fa-eye': passwordType === 'password' }"></i>
+        </div>
+      </ng-template>
+
+      <div *ngIf="form.controls[data.name].invalid && (form.controls[data.name].dirty || form.controls[data.name].touched)" class="alert alert-danger">
+        <div *ngIf="form.controls[data.name].errors">
+          {{ getErrorMessage(data.name, data.validations) }}
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="dynamic-form__button" [disabled]="!form.valid">Register</button>
+  </form>
+</div>

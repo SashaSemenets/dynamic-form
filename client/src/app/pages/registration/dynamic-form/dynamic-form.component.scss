@@ -1,0 +1,70 @@
+.dynamic-form {
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  &__content {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    position: relative;
+  }
+
+  &__field {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    margin: 5px 0;
+
+    label {
+      margin-bottom: 5px;
+    }
+
+    input {
+      color: #32325d;
+      font-size: .875rem;
+      padding: 0.625rem 0.75rem;
+      border-radius: 0.25rem;
+      border: 1px solid #ced4da;
+    }
+
+    &-password {
+      display: flex;
+      width: 100%;
+      align-items: center;
+
+      input {
+        width: 100%;
+      }
+
+      .far {
+        position: absolute;
+        right: 8px;
+        cursor: pointer;
+      }
+    }
+
+    &.error {
+      input {
+        border-color: #dc3545;
+      }
+
+      .alert {
+        color: #dc3545;
+      }
+    }
+  }
+
+  &__button {
+    border: none;
+    background-color: #0057b8;
+    color: #fff;
+    font-size: 1rem;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+}
