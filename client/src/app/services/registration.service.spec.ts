@@ -16,4 +16,28 @@ describe('RegistrationService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('#getForm should return value from observable',
+    (done: DoneFn) => {
+    service.getForm().subscribe(value => {
+      expect(value).toBeTruthy();
+      done();
+    });
+  });
+
+  it('#register should return value from observable',
+    (done: DoneFn) => {
+    service.register({
+      first_name: '',
+      middle_name: '',
+      last_name: '',
+      email: '',
+      password: '',
+      phone_number: ''
+    }).subscribe(value => {
+      console.log('value', value)
+      expect(value).toBeNull();
+      done();
+    });
+  });
 });
