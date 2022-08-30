@@ -24,7 +24,6 @@ export class DynamicFormComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!!changes.formData.currentValue) {
-      console.log('this.formData', this.formData);
       this.createForm(this.formData as RegistrationField[]);
     }
   }
