@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { RegistrationField, RegistrationRequest } from '../models/models';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,10 @@ export class RegistrationService {
   }
 
   public register(data: RegistrationRequest): Observable<any> {
-    return this.http.post<RegistrationRequest>(this.url, data);
+    return this.http.post<RegistrationRequest>(this.url, data)
+      .pipe(catchError((err: any) => {
+        const { error } = err;
+        return throwError(error)
+      }))
   }
 }

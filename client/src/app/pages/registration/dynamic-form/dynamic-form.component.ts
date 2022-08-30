@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { FieldValidation, RegistrationField } from 'src/app/models/models';
 import { RegistrationService } from 'src/app/services/registration.service';
 
@@ -15,12 +16,16 @@ export class DynamicFormComponent implements OnChanges {
 
   public form: FormGroup = this.fb.group({});
   public passwordType = 'password';
+  public errorMessage: string;
+  public showErrorMessage$ = new BehaviorSubject(false);
 
   constructor(
     private readonly fb: FormBuilder,
     private readonly registrationService: RegistrationService,
     private readonly router: Router,
-  ) { }
+  ) {
+    this.errorMessage = '';
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!!changes.formData.currentValue) {
@@ -121,6 +126,18 @@ export class DynamicFormComponent implements OnChanges {
     const { value } = this.form;
 
     this.registrationService.register(value)
-      .subscribe(() => this.router.navigate(['/welcome']));
+      .subscribe(
+        () => this.router.navigate(['/welcome']),
+        (error) => {
+          const { message } = error;
+          this.showErrorMessage$.next(true);
+          this.errorMessage = message[0];
+          setTimeout(() => this.onHideToastr(), 3000)
+        }
+      );
+  }
+
+  public onHideToastr(): void {
+    this.showErrorMessage$.next(false);
   }
 }

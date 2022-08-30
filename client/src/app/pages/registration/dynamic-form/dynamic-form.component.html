@@ -18,6 +18,10 @@
         </div>
       </div>
     </div>
-    <button type="submit" class="dynamic-form__button" [disabled]="!form.valid">Register</button>
+    <button type="submit" class="dynamic-form__button">Register</button>
   </form>
+
+  <div class="error-toastr" *ngIf="showErrorMessage$ | async" (click)="onHideToastr()">
+    {{ errorMessage }}
+  </div>
 </div>

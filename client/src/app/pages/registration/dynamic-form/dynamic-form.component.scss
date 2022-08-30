@@ -66,5 +66,17 @@
     padding: 10px;
     border-radius: 5px;
     margin-top: 10px;
+    cursor: pointer;
   }
+}
+
+.error-toastr {
+  background-color: #bd362f;
+  padding: 20px;
+  border-radius: 5px;
+  color: #fff;
+  position: absolute;
+  top: 30px;
+  right: 10px;
+  cursor: pointer;
 }
