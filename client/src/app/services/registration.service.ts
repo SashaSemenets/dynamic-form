@@ -20,9 +20,6 @@ export class RegistrationService {
 
   public register(data: RegistrationRequest): Observable<any> {
     return this.http.post<RegistrationRequest>(this.url, data)
-      .pipe(catchError((err: any) => {
-        const { error } = err;
-        return throwError(error)
-      }))
+      .pipe(catchError((err: any) => throwError(err.error)));
   }
 }

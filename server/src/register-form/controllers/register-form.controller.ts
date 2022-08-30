@@ -13,8 +13,6 @@ export class RegisterFormController {
 
   @Post()
   async registerUser(@Body() registration: RegistrationRequest) {
-    // console.log('res', res.req.body instanceof RegistrationRequest);
-    // res.status(HttpStatus.CREATED).send();
-    return 'This action adds a new user';
+    return { message: 'This action adds a new user' };
   }
 }

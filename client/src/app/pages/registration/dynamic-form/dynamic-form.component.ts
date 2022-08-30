@@ -127,14 +127,20 @@ export class DynamicFormComponent implements OnChanges {
 
     this.registrationService.register(value)
       .subscribe(
-        () => this.router.navigate(['/welcome']),
-        (error) => {
-          const { message } = error;
-          this.showErrorMessage$.next(true);
-          this.errorMessage = message[0];
-          setTimeout(() => this.onHideToastr(), 3000)
-        }
+        () => this.navigateToWelcome(),
+        (error) => this.handleError(error)
       );
+  }
+
+  private navigateToWelcome(): void {
+    this.router.navigate(['/welcome']);
+  }
+
+  private handleError(error: any): void {
+    const { message } = error;
+    this.showErrorMessage$.next(true);
+    this.errorMessage = message[0];
+    setTimeout(() => this.onHideToastr(), 3000);
   }
 
   public onHideToastr(): void {
