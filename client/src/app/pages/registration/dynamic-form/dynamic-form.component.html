@@ -1,5 +1,5 @@
 <div class="dynamic-form__wrapper">
-  <form [formGroup]="form" class="dynamic-form__content" (ngSubmit)="register()">
+  <form [formGroup]="form" class="dynamic-form__content" (ngSubmit)="register()" *ngIf="!!formData">
     <div *ngFor="let data of formData" class="dynamic-form__field" [class.error]="form.controls[data.name].invalid && (form.controls[data.name].dirty || form.controls[data.name].touched)">
       <label [attr.for]="data.name">{{ data.label }}<span *ngIf="data?.required">*</span></label>
 
